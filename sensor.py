@@ -13,7 +13,7 @@ mindist = 0.001
 # Assumed positive white noise amplitude. XXX
 # This should be gaussian, but who wants to play with
 # errinv()?
-us = 1
+us = 5
 
 class Sensor(object):
     """A sensor model."""
@@ -29,7 +29,7 @@ class Sensor(object):
         """Return the true signal value given
         a coordinate x."""
         dist2 = (self.x - x)**2 + (self.y - x)**2
-        return 1 / max(math.sqrt(dist2), mindist)
+        return 1 / max(dist2, mindist**2)
 
     def measure(self, x):
         """Synthesize a noisy signal strength measurement

@@ -64,9 +64,12 @@ def normalize(particles):
     """Adjust the weights of the particles to sum to 1."""
 
     w = sum([p.weight for p in particles if p != None])
+    if w == 0:
+        return False
     for i in range(len(particles)):
         if particles[i].weight != None:
             particles[i].weight /= w
+    return True
 
 def freshen(particles):
     """Replace dead particles."""

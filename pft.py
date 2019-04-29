@@ -20,8 +20,11 @@ dt = 0.1
 # Resampling interval in secs.
 rst = 0.5
 
+def gen_particles():
+    return [particle.gen() for _ in range(nparticles)]
+
 # Set up simulation.
-particles = [particle.gen() for _ in range(nparticles)]
+particles = gen_particles()
 vehicle = particle.gen()
 if vehicle.v > 0:
     vehicle.x = 0
@@ -44,7 +47,10 @@ while vehicle.x > 0 and vehicle.x < 1:
         s.measure(vehicle.x)
         for p in particles:
             p.measure(s)
-    particle.normalize(particles)
+    if not particle.normalize(particles):
+        print("lost")
+        particles = gen_particles()
+        continue
 
     # Report centroid.
     print("actual:", vehicle.x, "  imputed:", particle.centroid(particles))
