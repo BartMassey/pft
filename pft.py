@@ -18,15 +18,17 @@ nsensors = 2
 dt = 0.1
 
 # Resampling interval in secs.
-rst = 1
+rst = 0.5
 
 # Set up simulation.
 particles = [particle.gen() for _ in range(nparticles)]
 vehicle = particle.gen()
 if vehicle.v > 0:
     vehicle.x = 0
+    vehicle.v = max(vehicle.v, 0.05)
 else:
     vehicle.x = 1
+    vehicle.v = min(vehicle.v, -0.05)
 vehicle.advance(dt)
 sensors = [sensor.Sensor(x, y) for x, y in [(0.25, 0.5), (0.75, 0.6)]]
 
@@ -49,6 +51,7 @@ while vehicle.x > 0 and vehicle.x < 1:
 
     # Resample as needed.
     if t > rst:
+        print("resampling")
         particles = resample.resample(particles, nparticles)
         t = 0
 
