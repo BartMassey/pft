@@ -5,7 +5,7 @@
 
 # Bayesian Particle Filter demo.
 
-import particle, sensor, resample
+import particle, sensor, resample, render
 
 # Number of particles.
 nparticles = 10000
@@ -37,7 +37,8 @@ sensors = [sensor.Sensor(x, y) for x, y in [(0.25, 0.5), (0.75, 0.6)]]
 
 # Run sensing loop.
 t = 0
-while vehicle.x > 0 and vehicle.x < 1:
+states = list()
+while vehicle.x > 0 and vehicle.x < 1 and t < 50 * dt:
 
     # Replace dead particles if needed.
     particle.freshen(particles)
@@ -54,6 +55,8 @@ while vehicle.x > 0 and vehicle.x < 1:
 
     # Report centroid.
     print("actual:", vehicle.x, "  imputed:", particle.centroid(particles))
+    states.append((vehicle.clone(), [p.clone() for p in particles
+                                   if p.weight != None]))
 
     # Resample as needed.
     if t > rst:
@@ -66,3 +69,5 @@ while vehicle.x > 0 and vehicle.x < 1:
     for p in particles:
         p.advance(dt)
     t += dt
+
+render.render(sensors, states, dt)
