@@ -8,7 +8,7 @@
 import particle, sensor, resample
 
 # Number of particles.
-nparticles = 10000
+nparticles = 100000
 
 # Number of sensors. Must be at least two for
 # unambiguous estimation.
@@ -47,6 +47,8 @@ while vehicle.x > 0 and vehicle.x < 1:
         s.measure(vehicle.x)
         for p in particles:
             p.measure(s)
+
+    # Normalize likelihoods.
     if not particle.normalize(particles):
         print("lost")
         particles = gen_particles()
@@ -56,7 +58,7 @@ while vehicle.x > 0 and vehicle.x < 1:
     print("actual:", vehicle.x, "  imputed:", particle.centroid(particles))
 
     # Resample as needed.
-    if t > rst:
+    if t >= rst:
         print("resampling")
         particles = resample.resample(particles, nparticles)
         t = 0

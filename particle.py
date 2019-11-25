@@ -37,12 +37,12 @@ class Particle(object):
         self.x += self.v * dt
 
         # Check bounds.
-        if self.x < 0:
+        if self.x < -1:
             self.weight = None
-            self.x = 0
-        if self.x > 1:
+            self.x = -1
+        if self.x > 2:
             self.weight = None
-            self.x = 1
+            self.x = 2
 
     def measure(self, sensor):
         """Update the weight via the sensor reading."""
