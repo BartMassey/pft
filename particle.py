@@ -8,7 +8,7 @@
 import random
 
 # Random fraction of v to update v by.
-uv = 0.1
+uv = 0.05
 
 # Minimum / maximum v value.
 vclamp = 0.2
