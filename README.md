@@ -6,6 +6,10 @@ This Python 3 code demonstrates Bayesian Particle Filtering
 very early stages and needs a lot of work to be physically
 plausible.
 
+At the end of a simulation, an animation showing the
+inferred position (blue dot), actual position (red dot), and
+particle positions (green dots) will be displayed.
+
 ## License
 
 This work is made available under the "MIT License". Please

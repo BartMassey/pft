@@ -10,7 +10,7 @@ import particle, sensor, resample, render
 secs = 10
 
 # Number of particles.
-nparticles = 100000
+nparticles = 1000
 
 # Number of sensors. Must be at least two for
 # unambiguous estimation.
