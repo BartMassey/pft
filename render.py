@@ -14,7 +14,7 @@ def render(sensors, states, dt):
     ax.plot(x, x, color='k', lw=2)[0]
     ax.plot([s.x for s in sensors], [s.y for s in sensors],
              'o', markersize=2)[0]
-    vpos = ax.plot([states[0][0].x], [states[0][0].x], 'o', color='r', markersize=3)
+    vpos = ax.plot([states[0][0].x], [states[0][0].x], 'o', color='r', markersize=3)[0]
 
     def animate(i):
         vpos.set_xdata([states[i][0].x])
