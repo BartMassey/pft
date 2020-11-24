@@ -54,9 +54,13 @@ while vehicle.x > 0 and vehicle.x < 1 and t < 50 * dt:
         continue
 
     # Report centroid.
-    print("actual:", vehicle.x, "  imputed:", particle.centroid(particles))
-    states.append((vehicle.clone(), [p.clone() for p in particles
-                                   if p.weight != None]))
+    c = particle.centroid(particles)
+    print("actual:", vehicle.x, "  imputed:", c)
+    states.append((
+        vehicle.clone(),
+        [p.clone() for p in particles],
+        c,
+    ))
 
     # Resample as needed.
     if t > rst:
