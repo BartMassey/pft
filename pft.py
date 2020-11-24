@@ -7,7 +7,7 @@
 
 import particle, sensor, resample, render
 
-secs = 50
+secs = 10
 
 # Number of particles.
 nparticles = 100000
