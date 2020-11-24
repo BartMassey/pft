@@ -7,6 +7,8 @@
 
 import particle, sensor, resample, render
 
+secs = 50
+
 # Number of particles.
 nparticles = 10000
 
@@ -25,20 +27,13 @@ def gen_particles():
 
 # Set up simulation.
 particles = gen_particles()
-vehicle = particle.gen()
-if vehicle.v > 0:
-    vehicle.x = 0
-    vehicle.v = max(vehicle.v, 0.05)
-else:
-    vehicle.x = 1
-    vehicle.v = min(vehicle.v, -0.05)
-vehicle.advance(dt)
+vehicle = particle.Particle(0.01, 0.1, 1)
 sensors = [sensor.Sensor(x, y) for x, y in [(0.25, 0.5), (0.75, 0.6)]]
 
 # Run sensing loop.
 t = 0
 states = list()
-while vehicle.x > 0 and vehicle.x < 1 and t < 50 * dt:
+while vehicle.x > 0 and vehicle.x < 1 and t < secs * dt:
 
     # Replace dead particles if needed.
     particle.freshen(particles)
